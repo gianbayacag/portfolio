@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gian Cedrick Bayacag — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@300;400&family=Press+Start+2P&family=VT323&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── DEFAULT THEME (no theme — clean minimal) ─── */
+    :root, [data-theme="default"] {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --surface2: #f3f3f1;
+      --border: rgba(0,0,0,0.08);
+      --border-med: rgba(0,0,0,0.15);
+      --text: #1a1a18;
+      --muted: #6b6b67;
+      --hint: #a3a39e;
+      --accent: #1a1a18;
+      --accent2: #6b6b67;
+      --tag-bg: transparent;
+      --tag-border: rgba(0,0,0,0.15);
+      --tag-text: #6b6b67;
+      --heading-font: 'DM Serif Display', serif;
+      --body-font: 'DM Mono', monospace;
+      --nav-border: 1px solid rgba(0,0,0,0.08);
+      --card-border: 0.5px solid rgba(0,0,0,0.08);
+      --card-radius: 14px;
+      --divider-style: 1px solid rgba(0,0,0,0.08);
+      --section-label-color: #a3a39e;
+      --badge-border: 1px solid rgba(0,0,0,0.15);
+      --badge-bg: transparent;
+      --dot-color: #4caf82;
+      --link-hover-color: #1a1a18;
+      --h1-size: clamp(44px, 8vw, 70px);
+      --h1-shadow: none;
+      --btn-border: 1px solid rgba(0,0,0,0.15);
+      --btn-hover-bg: #f3f3f1;
+      --body-bg-effect: none;
+      --scanline: none;
+    }
+
+    /* ─── DARK THEME ─── */
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface2: #222222;
+      --border: rgba(255,255,255,0.07);
+      --border-med: rgba(255,255,255,0.13);
+      --text: #ebebeb;
+      --muted: #999;
+      --hint: #555;
+      --accent: #ebebeb;
+      --accent2: #999;
+      --tag-bg: transparent;
+      --tag-border: rgba(255,255,255,0.13);
+      --tag-text: #888;
+      --heading-font: 'DM Serif Display', serif;
+      --body-font: 'DM Mono', monospace;
+      --nav-border: 1px solid rgba(255,255,255,0.07);
+      --card-border: 0.5px solid rgba(255,255,255,0.07);
+      --card-radius: 14px;
+      --divider-style: 1px solid rgba(255,255,255,0.07);
+      --section-label-color: #555;
+      --badge-border: 1px solid rgba(255,255,255,0.13);
+      --badge-bg: transparent;
+      --dot-color: #4caf82;
+      --link-hover-color: #ebebeb;
+      --h1-size: clamp(44px, 8vw, 70px);
+      --h1-shadow: none;
+      --btn-border: 1px solid rgba(255,255,255,0.13);
+      --btn-hover-bg: #222;
+      --body-bg-effect: none;
+      --scanline: none;
+    }
+
+    /* ─── PIXEL THEME ─── */
+    [data-theme="pixel"] {
+      --bg: #0d0d1a;
+      --surface: #13132a;
+      --surface2: #1a1a35;
+      --border: rgba(100,100,255,0.18);
+      --border-med: rgba(120,120,255,0.35);
+      --text: #e8e8ff;
+      --muted: #9898c8;
+      --hint: #5a5a8a;
+      --accent: #4eff91;
+      --accent2: #ffe94e;
+      --tag-bg: transparent;
+      --tag-border: #a855f7;
+      --tag-text: #a855f7;
+      --heading-font: 'Press Start 2P', monospace;
+      --body-font: 'VT323', monospace;
+      --nav-border: 2px solid rgba(120,120,255,0.35);
+      --card-border: 2px solid rgba(120,120,255,0.35);
+      --card-radius: 0px;
+      --divider-style: 2px solid rgba(100,100,255,0.18);
+      --section-label-color: #ffe94e;
+      --badge-border: 2px solid #4eff91;
+      --badge-bg: transparent;
+      --dot-color: #4eff91;
+      --link-hover-color: #4ef0ff;
+      --h1-size: clamp(14px, 3vw, 22px);
+      --h1-shadow: 2px 2px 0 #003344;
+      --btn-border: 2px solid rgba(120,120,255,0.35);
+      --btn-hover-bg: rgba(78,240,255,0.05);
+      --body-bg-effect: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+      --scanline: block;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body-font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    body::before {
+      content: '';
+      display: var(--scanline, none);
+      position: fixed;
+      inset: 0;
+      background: var(--body-bg-effect);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: var(--nav-border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, border-color 0.35s;
+    }
+
+    .nav-logo {
+      font-family: var(--heading-font);
+      font-size: 15px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.35s, font-family 0.35s;
+    }
+
+    [data-theme="pixel"] .nav-logo { font-size: 9px; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--body-font);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--link-hover-color); }
+
+    /* THEME SWITCHER */
+    .theme-switcher {
+      position: relative;
+    }
+
+    .theme-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--body-font);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: var(--btn-border);
+      padding: 5px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .theme-btn:hover { color: var(--text); }
+
+    .theme-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .theme-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--surface);
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      min-width: 140px;
+      z-index: 300;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .theme-dropdown.open { display: block; }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-family: var(--body-font);
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      letter-spacing: 0.04em;
+    }
+
+    .theme-option:hover { background: var(--surface2); color: var(--text); }
+    .theme-option.active { color: var(--text); font-weight: 500; }
+
+    .theme-swatch {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* MAIN */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 5rem 0 3rem; }
+
+    #hero {
+      padding-top: 7rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--hint);
+      margin-bottom: 1rem;
+    }
+
+    [data-theme="pixel"] .eyebrow { font-size: 7px; }
+
+    h1 {
+      font-family: var(--heading-font);
+      font-size: var(--h1-size);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--accent);
+      text-shadow: var(--h1-shadow);
+      margin-bottom: 1rem;
+      transition: font-family 0.35s, color 0.35s;
+    }
+
+    [data-theme="pixel"] h1 { line-height: 1.6; }
+
+    .hero-sub {
+      font-size: 12px;
+      color: var(--accent2);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.06em;
+    }
+
+    [data-theme="pixel"] .hero-sub { font-size: 8px; }
+
+    .hero-bio {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 440px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    [data-theme="pixel"] .hero-bio { font-size: 20px; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--dot-color);
+      padding: 6px 14px;
+      border: var(--badge-border);
+      border-radius: var(--card-radius);
+      background: var(--badge-bg);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    [data-theme="pixel"] .status-badge { font-size: 7px; }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--dot-color);
+    }
+
+    [data-theme="default"] .dot,
+    [data-theme="dark"] .dot { animation: pulse 2s infinite; }
+    [data-theme="pixel"] .dot { border-radius: 0; animation: blink 1s step-end infinite; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--body-font);
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 9px 16px;
+      border: var(--btn-border);
+      border-radius: 99px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    [data-theme="pixel"] .hero-links a { border-radius: 0; font-size: 7px; }
+
+    .hero-links a:hover { color: var(--link-hover-color); background: var(--btn-hover-bg); }
+    [data-theme="pixel"] .hero-links a:hover { border-color: var(--link-hover-color); }
+
+    .hero-links a svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* SECTION */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--section-label-color);
+      margin-bottom: 1.5rem;
+    }
+
+    [data-theme="pixel"] .section-label { font-size: 8px; }
+
+    hr {
+      border: none;
+      border-top: var(--divider-style);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    [data-theme="pixel"] hr::after {
+      content: '>>>';
+      position: absolute;
+      top: -11px;
+      right: 0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--hint);
+      background: var(--bg);
+      padding: 0 6px;
+    }
+
+    /* PROJECTS */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      background: var(--border);
+      gap: 1px;
+    }
+
+    [data-theme="pixel"] .projects-list { gap: 3px; background: transparent; border: none; }
+
+    .project-item {
+      background: var(--surface);
+      padding: 1.5rem 1.75rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    [data-theme="pixel"] .project-item { border: var(--card-border); border-radius: var(--card-radius); }
+    .project-item:hover { background: var(--surface2); }
+
+    .project-name {
+      font-family: var(--heading-font);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    [data-theme="pixel"] .project-name { font-size: 10px; color: var(--accent); margin-bottom: 10px; }
+    [data-theme="retro"] .project-name { font-size: 20px; }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 420px;
+      margin-bottom: 12px;
+    }
+
+    [data-theme="pixel"] .project-desc { font-size: 18px; }
+    [data-theme="retro"] .project-desc { font-size: 14px; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border-radius: 99px;
+      border: 1px solid var(--tag-border);
+      color: var(--tag-text);
+      background: var(--tag-bg);
+    }
+
+    [data-theme="pixel"] .tag { border-radius: 0; font-size: 6px; padding: 4px 8px; }
+    [data-theme="retro"] .tag { border-radius: 2px; }
+
+    .project-year { font-size: 11px; color: var(--hint); white-space: nowrap; padding-top: 4px; letter-spacing: 0.04em; }
+    [data-theme="pixel"] .project-year { font-size: 7px; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      background: var(--border);
+      gap: 1px;
+    }
+
+    [data-theme="pixel"] .skills-grid { gap: 3px; background: transparent; border: none; }
+
+    .skill-cell {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+    }
+
+    [data-theme="pixel"] .skill-cell { border: var(--card-border); }
+
+    .skill-cat {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hint);
+      margin-bottom: 0.75rem;
+    }
+
+    [data-theme="pixel"] .skill-cat { font-size: 7px; color: var(--accent2); }
+
+    .skill-items { font-size: 13px; color: var(--muted); line-height: 2; font-weight: 300; }
+    [data-theme="pixel"] .skill-items { font-size: 18px; }
+    [data-theme="retro"] .skill-items { font-size: 14px; }
+
+    /* ABOUT */
+    .about-card {
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      padding: 2rem;
+      background: var(--surface);
+    }
+
+    .about-text { font-size: 13px; color: var(--muted); line-height: 1.95; font-weight: 300; }
+    .about-text p + p { margin-top: 1rem; }
+    [data-theme="pixel"] .about-text { font-size: 19px; }
+    [data-theme="retro"] .about-text { font-size: 14px; }
+
+    .about-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: var(--card-border);
+      margin-top: 1.75rem;
+    }
+
+    [data-theme="pixel"] .about-meta { gap: 3px; background: transparent; border-top: var(--divider-style); padding-top: 1.5rem; }
+
+    .meta-item { background: var(--surface); padding: 1rem 1.25rem; }
+    [data-theme="pixel"] .meta-item { background: transparent; padding: 0.25rem 0; }
+
+    .meta-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hint); margin-bottom: 4px; }
+    [data-theme="pixel"] .meta-label { font-size: 6px; }
+
+    .meta-value { font-size: 13px; color: var(--text); font-weight: 300; }
+    [data-theme="pixel"] .meta-value { font-size: 17px; }
+    [data-theme="retro"] .meta-value { font-size: 14px; }
+
+    /* CONTACT */
+    .contact-box {
+      border: var(--card-border);
+      border-radius: var(--card-radius);
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      background: var(--surface);
+    }
+
+    .contact-heading { font-family: var(--heading-font); font-size: 26px; font-weight: 400; margin-bottom: 6px; color: var(--text); }
+    [data-theme="pixel"] .contact-heading { font-size: 11px; color: var(--accent); line-height: 1.6; }
+
+    .contact-sub { font-size: 13px; color: var(--muted); font-weight: 300; }
+    [data-theme="pixel"] .contact-sub { font-size: 18px; }
+    [data-theme="retro"] .contact-sub { font-size: 14px; }
+
+    .cta {
+      display: inline-block;
+      font-family: var(--body-font);
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 11px 22px;
+      border: var(--btn-border);
+      border-radius: 99px;
+      color: var(--text);
+      background: transparent;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    [data-theme="pixel"] .cta { border-radius: 0; color: var(--accent); border-color: var(--accent); }
+    [data-theme="retro"] .cta { border-radius: 2px; }
+    .cta:hover { background: var(--btn-hover-bg); }
+
+    /* FOOTER */
+    footer {
+      border-top: var(--divider-style);
+      text-align: center;
+      padding: 2rem;
+      font-size: 11px;
+      color: var(--hint);
+      letter-spacing: 0.06em;
+      position: relative;
+      z-index: 1;
+    }
+
+    [data-theme="pixel"] footer { font-size: 6px; }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      main { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .contact-box { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Gian Cedrick</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="theme-switcher">
+        <button class="theme-btn" id="themeToggle" aria-label="Switch theme">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          Theme
+        </button>
+        <div class="theme-dropdown" id="themeDropdown">
+          <button class="theme-option active" data-theme="default">
+            <span class="theme-swatch" style="background:#fafaf9; border-color:rgba(0,0,0,0.2);"></span>
+            Default
+          </button>
+          <button class="theme-option" data-theme="dark">
+            <span class="theme-swatch" style="background:#0f0f0f;"></span>
+            Dark
+          </button>
+          <button class="theme-option" data-theme="pixel">
+            <span class="theme-swatch" style="background:#0d0d1a; border-color:#4eff91;"></span>
+            Pixel
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section id="hero">
+      <div class="status-badge">
+        <span class="dot"></span>
+        Rising 3rd Year — CS Student
+      </div>
+      <p class="eyebrow">Portfolio · 2026</p>
+      <h1>Gian Cedrick<br>Bayacag</h1>
+      <p class="hero-sub">[ CS Student — 2nd → 3rd Year ]</p>
+      <p class="hero-bio">
+        A passionate computer science student from Davao, Philippines, building a strong foundation in web development and programming — one project at a time.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/gianbayacag" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:gianbayacag@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+      </div>
+    </section>
+
+    <section id="work">
+      <p class="section-label fade-in">Selected work</p>
+      <hr>
+      <div class="projects-list fade-in">
+        <div class="project-item">
+          <div>
+            <p class="project-name">Tower Defense Game</p>
+            <p class="project-desc">A tower defense game where players place towers to stop waves of enemies from reaching the base. Built from scratch using Java and object-oriented programming principles.</p>
+            <div class="tag-row">
+              <span class="tag">Java</span>
+              <span class="tag">OOP</span>
+              <span class="tag">Game Logic</span>
+            </div>
+          </div>
+          <span class="project-year">2025</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <p class="section-label fade-in">Skills</p>
+      <hr>
+      <div class="skills-grid fade-in">
+        <div class="skill-cell">
+          <p class="skill-cat">Languages</p>
+          <p class="skill-items">Java<br>JavaScript<br>PHP<br>SQL</p>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cat">Web</p>
+          <p class="skill-items">HTML<br>CSS<br>Bootstrap<br>Laravel</p>
+        </div>
+        <div class="skill-cell">
+          <p class="skill-cat">Database</p>
+          <p class="skill-items">SQL<br>SQLite</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <p class="section-label fade-in">About</p>
+      <hr>
+      <div class="about-card fade-in">
+        <div class="about-text">
+          <p>Hey, I'm Gian — a CS student from Davao, Philippines heading into my 3rd year of college. I started my dev journey through coursework and built a tower defense game in Java that got me genuinely hooked on programming.</p>
+          <p>I'm comfortable with web tech like HTML, CSS, Bootstrap, PHP, and Laravel, and I work with SQL and SQLite for data. Still leveling up, but I love figuring things out and building stuff that works.</p>
+          <p>Currently looking for opportunities to grow, collaborate, and gain real-world experience beyond the classroom.</p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-item">
+            <p class="meta-label">Status</p>
+            <p class="meta-value">2nd → 3rd Year</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Course</p>
+            <p class="meta-value">Computer Science</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Location</p>
+            <p class="meta-value">Davao, PH</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Focus</p>
+            <p class="meta-value">Web Dev + Games</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <p class="section-label fade-in">Contact</p>
+      <hr>
+      <div class="contact-box fade-in">
+        <div>
+          <p class="contact-heading">Let's connect.</p>
+          <p class="contact-sub">Open to collabs, projects, and opportunities.</p>
+        </div>
+        <a href="mailto:gianbayacag@gmail.com" class="cta">Say hello →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Gian Cedrick Bayacag &nbsp;·&nbsp; Davao, Philippines
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const els = document.querySelectorAll('.fade-in');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => obs.observe(el));
+
+    // Theme switcher
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const dropdown = document.getElementById('themeDropdown');
+    const options = document.querySelectorAll('.theme-option');
+
+    const saved = localStorage.getItem('portfolio-theme') || 'default';
+    setTheme(saved);
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => dropdown.classList.remove('open'));
+    dropdown.addEventListener('click', e => e.stopPropagation());
+
+    options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const t = opt.dataset.theme;
+        setTheme(t);
+        dropdown.classList.remove('open');
+        localStorage.setItem('portfolio-theme', t);
+      });
+    });
+
+    function setTheme(t) {
+      html.setAttribute('data-theme', t);
+      options.forEach(o => o.classList.toggle('active', o.dataset.theme === t));
+    }
+  </script>
+
+</body>
+</html>
